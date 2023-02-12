@@ -1,4 +1,4 @@
-# Sukoon 
+#Family Medical 
 This is a stress-relieving website project made for the hackathon [Hackofiesta](https://hack.iiitl.ac.in/). 
 This project is under the theme **Healthcare.**
 This was our first hackathon.
