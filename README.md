@@ -4,7 +4,7 @@ This project is under the theme **Healthcare.**
 This was our first hackathon.
 
 ## Website Link-
-<a href="https://sukoon-stress-free.netlify.app/">Sukoon</a>
+<a href="https://family-medical-stressfree.netlify.app/">Family Medical</a>
 
 ## 🕊 Our Tagline 
 The one step solution to get relief from your stress.
