@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to FirebaseRTC</title>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.13.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.13.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+    <div id="navbar">
+        <a href="#" class="menu-bar" id="show-menu">
+            <i class="fas fa-bars"></i>
+        </a>
+    </div>
+    <nav id="nav-menu">
+        <ul class="nav-menu-items">
+            <div id="navbar-toggle">
+                <a href="#" class="menu-bar" id="hide-menu">
+                    <i class="fas fa-bars nav-icon"></i>
+                </a>
+                <a href="#">
+                    <h2><i class="fas fa-chalkboard-teacher nav-icon" aria-hidden="true"></i>REMO</h2>
+                </a>
+            </div>
+            <hr />
+            <div class="nav-section">
+                <li class="nav-text"><a href="#" onclick="openMe()" style="position: absolute"><i class="fas fa-file-signature nav-icon" aria-hidden="true"></i>Whiteboard</a></li>
+                <li class="nav-text"><a href="#" onclick="openMe()" style="position: absolute"><i class="fab fa-github nav-icon" aria-hidden="true"></i>GitHub Repo</a></li>
+                <li class="nav-text"><a href="#" onclick="openMe()" style="position: absolute"><i class="fas fa-laptop-code nav-icon" aria-hidden="true"></i>Code Editor</a></li>
+            </div>
+            <hr />
+            <div class="nav-section">
+                <li class="nav-text"><a href="#"><i class="fas fa-sign-out-alt nav-icon" aria-hidden="true"></i>Exit Room</a></li>
+            </div>
+        </ul>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-md-12 video" id="myDIV">
+            <div class="video">
+                <div class="buttons">
+                    <button class="mdc-button mdc-button--raised" id="cameraBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
+                <span class="mdc-button__label"></span>
+            </button>
+                    <button class="mdc-button mdc-button--raised" disabled id="toggleCamera">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">videocam</i>
+                <span class="mdc-button__label"></span>
+            </button>
+                    <button class="mdc-button mdc-button--raised" disabled id="toggleMic">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">mic</i>
+                <span class="mdc-button__label"></span>
+            </button>
+                    <button class="mdc-button mdc-button--raised" disabled id="createBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+                <span class="mdc-button__label">Create room</span>
+            </button>
+                    <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+                <span class="mdc-button__label">Join room</span>
+            </button>
+                    <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">call_end</i>
+                <span class="mdc-button__label"></span>
+            </button>
+                </div>
+                <div>
+                    <span id="currentRoom"></span>
+                </div>
+                <div id="videos">
+                    <video id="remoteVideo" autoplay playsinline style="width: 1475px"></video>
+                    <video id="localVideo" muted autoplay playsinline style="right: 0em"></video>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-0 others d-none" id="myotherDIV" style="height: 100vh;margin-top:20px;">
+            <div class="container-fluid" style="height: 100vh;">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12 my-auto" style="overflow-y: scroll; height:100vh;">
+                        <h1 class="text-center">Github Integration</h1>
+                        <p>Enter the username</p>
+                        <input type="text" id="username" style="width: 80%;" placeholder="GitHub username">
+                        <button id="btnUser" class="btn btn-primary" style="font-size: 15px;">Search</button>
+                        <div>
+                            <p id="divResultPath"></p>
+                        </div>
+                        <div id="divResult">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    Enter ID for room to join:
+                    <div class="mdc-text-field">
+                        <input type="text" id="room-id" class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="my-text-field">Room ID</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </div>
+                <footer class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">Cancel</span>
+                </button>
+                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label">Join</span>
+                </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+
+    <script src="app.js"></script>
+    <script src="navigation.js"></script>
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
