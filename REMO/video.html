@@ -1,42 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Video Call</title>
-  <script src='https://meet.jit.si/external_api.js'></script>
-</head>
-<body>
-<div style="text-align: center;background-color:cyan">
 
-<button id="start" type="button">Start</button>
-</div>
-<div id="jitsi-container">
-</div>
-
-<script>
-var button = document.querySelector('#start');
-var container = document.querySelector('#jitsi-container');
-var api = null;
-
-button.addEventListener('click', () => {
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var stringLength = 30;
-
-    function pickRandom() {
-    return possible[Math.floor(Math.random() * possible.length)];
-}
-
-var randomString = Array.apply(null, Array(stringLength)).map(pickRandom).join('');
-
-    var domain = "meet.jit.si";
-    var options = {
-        "roomName": randomString,
-        "parentNode": container,
-        "width": 600,
-        "height": 600,
-    };
-    api = new JitsiMeetExternalAPI(domain, options);
-});
-
-</script>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script src='https://8x8.vc/vpaas-magic-cookie-f3c9b8fb9ba44c398051b7702f982189/external_api.js' async></script>
+        <style>html, body, #jaas-container { height: 100%; }</style>
+        <script type="text/javascript">
+          window.onload = () => {
+            const api = new JitsiMeetExternalAPI("8x8.vc", {
+              roomName: "vpaas-magic-cookie-f3c9b8fb9ba44c398051b7702f982189/SampleAppOppositeOutlinesSpoilSimilarly",
+              parentNode: document.querySelector('#jaas-container'),
+							// Make sure to include a JWT if you intend to record,
+							// make outbound calls or use any other premium features!
+							// jwt: "eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtZjNjOWI4ZmI5YmE0NGMzOTgwNTFiNzcwMmY5ODIxODkvNmU3ZTNkLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE2ODg5MTEyMDksImV4cCI6MTY4ODkxODQwOSwibmJmIjoxNjg4OTExMjA0LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtZjNjOWI4ZmI5YmE0NGMzOTgwNTFiNzcwMmY5ODIxODkiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOmZhbHNlLCJvdXRib3VuZC1jYWxsIjpmYWxzZSwic2lwLW91dGJvdW5kLWNhbGwiOmZhbHNlLCJ0cmFuc2NyaXB0aW9uIjpmYWxzZSwicmVjb3JkaW5nIjpmYWxzZX0sInVzZXIiOnsiaGlkZGVuLWZyb20tcmVjb3JkZXIiOmZhbHNlLCJtb2RlcmF0b3IiOnRydWUsIm5hbWUiOiJUZXN0IFVzZXIiLCJpZCI6Imdvb2dsZS1vYXV0aDJ8MTA4NzM4MzIxMTAwNDA4MzgyMTM0IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJ0ZXN0LnVzZXJAY29tcGFueS5jb20ifX0sInJvb20iOiIqIn0.sQl2M3zV4P_WibmEfQMG8rece7GMIcBgmZNSOFJSG837OHjRP-RBBdWT2gZKUno5Jc-D1qU2OpUibsfs-r2LQ-6ti0ro0pGBKdnHQzt8-8DOwMdf9XUkcoD1Kf8xw3d-hAw-XJ26XhmVjlattpq0xVQLHlxxeUgDQgRLEtqKm2QbUPunZxiIopSfiiRfI6NgmqdcGf6sOaSrOpfu72CPYM2D8uiYJ-AtA6--Q4SdKpVlUCBVbO6ZHp_M0cFYqvwGXXEPJVoJO5WdfkTH7lcowroArVM2DQDjd0E-h6pQm7afrbzrqmD7YEWkH2NveEKMtDGVEuhE40jDzEAxdT7SBg"
+            });
+          }
+        </script>
+      </head>
+      <body><div id="jaas-container" /></body>
+    </html>
+  
